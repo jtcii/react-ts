@@ -286,9 +286,10 @@ const getTotalAvailability = (providerAvailability: TimeRange[]) => {
 }
 
 // Returns a sorted copy of the array in order of how many hours the provider is available
-const sortByAvailability = (providers: ProviderData[]) => {
+const sortByAvailability = (providers: ProviderData[]): ProviderData[] => {
   // TODO returns a sorted copy of the array in order of how many hours the provider is available
   //console.log(getTotalAvailability(providers[0].availability))
+  // b-a is desc order
   const sorted = providers.sort((a, b) => getTotalAvailability(b.availability) - getTotalAvailability(a.availability))
   return sorted
 };
