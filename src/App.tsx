@@ -1,4 +1,4 @@
-import React, { PropsWithChildren, useCallback, useEffect, useReducer, useState, useRef } from 'react';
+import React, { PropsWithChildren, useCallback, useEffect, useReducer, useState, useRef, ChangeEvent, FC, InputHTMLAttributes } from 'react';
 import './App.css';
 
 
@@ -14,6 +14,12 @@ const Box: React.FunctionComponent<PropsWithChildren> = ({ children }) => (
   >
     {children}
   </div>
+);
+
+const SearchInput: FC<SearchProps> = ({ value, onChange }) => (
+
+  <input value={value} onChange={onChange}></input>
+
 );
 
 const List: React.FunctionComponent<{
@@ -71,6 +77,11 @@ const Provider = (props: ProviderData) => {
 };
 
 // types
+interface SearchProps extends InputHTMLAttributes<HTMLInputElement> {
+  value: string | number
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void
+}
+
 interface TimeRange {
   start: Date;
   end: Date;
@@ -380,7 +391,7 @@ function App() {
         <div style={{ marginTop: "2rem" }}>
           <h1>Find a therapist near you!</h1>
         </div>
-        <input
+        <SearchInput
           value={filter}
           onChange={(evt) => filterSet(evt.target.value)}
         />
