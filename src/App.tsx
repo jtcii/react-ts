@@ -278,11 +278,16 @@ const providerData: ProviderData[] = [
 // functions
 // Returns the number of hours a provider is available based off the availability object in ProviderData
 const getTotalAvailability = (providerAvailability: TimeRange[]) => {
-  const availableTime = providerAvailability.reduce((acc, rangeOfDates) => {
-    const totalTime = Math.abs(rangeOfDates.start.getTime() - rangeOfDates.end.getTime())
-    return (acc + totalTime)
-  }, 0)
-  return availableTime
+
+  const availableTime = providerAvailability.reduce((acc, timeRange) => {
+
+    const totalTime = timeRange.end.getTime() - timeRange.start.getTime();
+    return acc + totalTime;
+
+  }, 0);
+
+  return availableTime;
+
 }
 
 // Returns a sorted copy of the array in order of how many hours the provider is available
@@ -290,8 +295,10 @@ const sortByAvailability = (providers: ProviderData[]): ProviderData[] => {
   // TODO returns a sorted copy of the array in order of how many hours the provider is available
   //console.log(getTotalAvailability(providers[0].availability))
   // b-a is desc order
-  const sorted = providers.sort((a, b) => getTotalAvailability(b.availability) - getTotalAvailability(a.availability))
-  return sorted
+  const sorted = providers.sort((a, b) => getTotalAvailability(b.availability) - getTotalAvailability(a.availability));
+
+  return sorted;
+
 };
 
 // app
@@ -389,18 +396,22 @@ function App() {
           backgroundColor: "#f5f5f5",
         }}
       >
+
         <div style={{ marginTop: "2rem" }}>
           <h1>Find a therapist near you!</h1>
         </div>
+
         <SearchInput
           value={filter}
           onChange={(evt) => filterSet(evt.target.value)}
         />
+
         <div style={{}}>
           {sortByAvailability(providerData).filter((provider) => provider.name.toLowerCase().includes(filter.toLowerCase())).map((provider) => (
             <Provider key={provider.name} {...provider} />
           ))}
         </div>
+
       </div>
 
     </div >
