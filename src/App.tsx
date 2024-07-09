@@ -286,7 +286,7 @@ const getTotalAvailability = (providerAvailability: TimeRange[]) => {
 }
 
 // Returns a sorted copy of the array in order of how many hours the provider is available
-const sortByAvailability = (providers: ProviderData[]): ProviderData[] => {
+const sortByAvailability = (providers: ProviderData[]) => {
   // TODO returns a sorted copy of the array in order of how many hours the provider is available
   //console.log(getTotalAvailability(providers[0].availability))
   const sorted = providers.sort((a, b) => getTotalAvailability(b.availability) - getTotalAvailability(a.availability))
@@ -396,7 +396,7 @@ function App() {
           onChange={(evt) => filterSet(evt.target.value)}
         />
         <div style={{}}>
-          {sortByAvailability(providerData).filter((provider) => provider.name.includes(filter)).map((provider) => (
+          {sortByAvailability(providerData).filter((provider) => provider.name.toLowerCase().includes(filter.toLowerCase())).map((provider) => (
             <Provider key={provider.name} {...provider} />
           ))}
         </div>
