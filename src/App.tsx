@@ -333,6 +333,8 @@ function App() {
     }
   }, []);
 
+  const [filter, filterSet] = React.useState("");
+
   // ui
   return (
 
@@ -364,6 +366,8 @@ function App() {
         <button onClick={onAddTodo}>Add Todo</button>
       </div>
 
+
+
       <div
         style={{
           paddingLeft: "2rem",
@@ -376,8 +380,12 @@ function App() {
         <div style={{ marginTop: "2rem" }}>
           <h1>Find a therapist near you!</h1>
         </div>
+        <input
+          value={filter}
+          onChange={(evt) => filterSet(evt.target.value)}
+        />
         <div style={{}}>
-          {sortByAvailability(providerData).map((provider) => (
+          {sortByAvailability(providerData).filter((provider) => provider.name.includes(filter)).map((provider) => (
             <Provider key={provider.name} {...provider} />
           ))}
         </div>
