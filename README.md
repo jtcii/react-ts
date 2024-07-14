@@ -1,3 +1,8 @@
+https://www.youtube.com/watch?v=j8AVXNozac8&list=PLNqp92_EXZBJ4CBroxVBJEpAXoz1g-naZ
+
+### `yarn predeploy`
+### `yarn deploy`
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
